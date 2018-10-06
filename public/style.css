@@ -1,0 +1,48 @@
+body {
+  background-color: #f3f3f3;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+video {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+.main {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 5vh;
+}
+
+#webcam {
+  margin-top: 50px;
+  /* background-color: black; */
+  width: 100%;
+  height: 100%;
+}
+
+h1 {
+  color: #43419f;
+}
+
+.underline {
+  padding: 0 10px;
+  box-shadow: inset 0 -15px 0 0 #7cfdba;
+}
+
+a {
+  color: #9b9b9b;
+}
+
+p {
+  font-size: 10px;
+  color: #9b9b9b;
+  line-height: 4px;
+}
+
+.caption {
+  margin-top: 50px;
+}

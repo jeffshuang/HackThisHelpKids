@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Pornhub</title>
+  <meta charset="UTF-8">
+  <!-- styles -->
+  <link rel="stylesheet" type="text/css" href="../public/style.css">
+  <!-- fonts -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700,700italic,800" rel="stylesheet">
+  <!-- javascript -->
+  <script src="main.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+
+  <div class="main">
+
+    <h1><span class="underline">Hi there!</span></h1>
+
+    <video class="main" id="player" autoplay></video>
+    <div id="webcam"><img src="webcam.png"></div>
+
+    <div class="caption">
+      <p>Can’t use your camera right now?</p>
+      <p><a href="#">Enter login information here.</a></p>
+    </div>
+
+  </div>
+
+
+
+</body>
+
+<script>
+  console.log('Siht')
+  const player = document.getElementById('player');
+  const canvas = document.createElement('canvas');
+  canvas.width = 320;
+  canvas.height = 240;
+  const context = canvas.getContext('2d');
+  const constraints = {
+    video: true,
+  };
+
+  var x = 0;
+  var intervalID = setInterval(() => {
+    // Draw the video frame to the canvas.
+    context.drawImage(player, 0, 0, canvas.width, canvas.height);
+    var dataURL = canvas.toDataURL();
+    console.log(dataURL);
+    console.log('poop');
+    if (++x === 3) {
+      window.clearInterval(intervalID);
+    }
+  }, 1000);
+
+
+  // Attach the video stream to the video element and autoplay.
+  navigator.mediaDevices.getUserMedia(constraints)
+    .then((stream) => {
+      player.srcObject = stream;
+    });
+</script>
+
+</html>
