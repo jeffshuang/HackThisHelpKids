@@ -1,9 +1,4 @@
 import requests
-import matplotlib.pyplot as plt
-from PIL import Image
-from matplotlib import patches
-from io import BytesIO
-import sys
 
 # Replace <Subscription Key> with your valid subscription key.
 subscription_key = "0001beb2e84743f88ebb524de2421c20"
