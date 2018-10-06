@@ -1,6 +1,57 @@
 var express = require("express");
 var firebase = require("firebase");
+var request = require('request');
+var axios = require('axios')
 var router = express.Router();
+
+var subscriptionKey = "0001beb2e84743f88ebb524de2421c20";
+var uriBase = "https://eastus.api.cognitive.microsoft.com/face/v1.0/detect"
+
+function login(){
+  var params = {
+            "returnFaceId": "true",
+            "returnFaceLandmarks": "false",
+            "returnFaceAttributes":
+                "age,emotion",
+        };
+
+  var urlL = Object.keys(params).map(function(k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(params[k])
+  }).join('&');
+
+  axios({
+    method: 'post',
+    url: uriBase+urlL,
+    headers:  {
+      "Content-Type": "application/json",
+      "Ocp-Apim-Subscription-Key": subscriptionKey
+    },
+    data: '{"url": ' + '"' + 'http://img.timeinc.net/time/photoessays/2008/people_who_mattered/obama_main_1216.jpg' + '"}'
+  }).then(function(response) {
+    console.log(response)
+  })
+}
+
+/**var options = {
+  url: uriBase + "?" + urlL,
+  headers: {
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": subscriptionKey
+  },
+  data: '{"url": ' + '"' + 'http://img.timeinc.net/time/photoessays/2008/people_who_mattered/obama_main_1216.jpg' + '"}'
+};
+**/
+
+//
+// request.post(options, function optionalCallback(err, httpResponse, body) {
+//   if (err) {
+//     return console.error('upload failed:', err);
+//   }
+//   console.log(options)
+//   console.log('Upload successful!  Server responded with:', body);
+// });
+
+
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
@@ -8,6 +59,9 @@ router.get("/", function(req, res, next) {
   loginUser();
   // addNewKid();
   res.render("index", { title: "Penis" });
+
+  var storageRef = firebase.storage().ref();
+
 });
 
 var config = {
