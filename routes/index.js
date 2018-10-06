@@ -74,10 +74,10 @@ var config = {
 };
 firebase.initializeApp(config);
 
-
 function makeId() {
   var text = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
   for (var i = 0; i < 10; i++)
     text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -86,7 +86,7 @@ function makeId() {
 }
 
 // Get a reference to the database service
-var database = firebase.database().ref('/');
+var database = firebase.database().ref("/");
 
 // Add child that doesnt exist
 function addNewKid() {
@@ -95,7 +95,6 @@ function addNewKid() {
   var childRef = firebase.database().ref('child/' + newId + '/key');
 
   childRef.set("pornhubkey.com");
-
 }
 
 // Add parent that doesnt exist
@@ -119,7 +118,7 @@ function addKidImage(id) {
   var obj = {
     date: time,
     url: "www.pornhub.com"
-  }
+  };
 
   childRef.set(obj);
 }
@@ -181,7 +180,7 @@ function loginUser(currentImage) {
 function processData(data) {
   console.log("processChildren");
 
-  var found = false
+  var found = false;
 
   //Loop through kids
   Object.keys(data).forEach(function(key) {
@@ -191,7 +190,6 @@ function processData(data) {
     console.log(newObj["key"]);
     var url = newObj["key"];
     var found = found || checkImage(url);
-
   });
 
   return found;
