@@ -86,7 +86,8 @@
       console.log('Uploaded a blob or file!');
       storageRef.child(p).getDownloadURL().then(function (url) {
         // url is the download URL for 'images/stars.jpg'
-
+        console.log(url);
+        $.post('/sendPic', { url: url })
       })
 
     });
