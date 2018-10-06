@@ -35,11 +35,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/adults", adultsRouter);
-app.post("/sendPic/", function(req, res) {
+app.post("/sendPic/", function(req, res, next) {
   var email = req.body.url;
   console.log(email);
-  login(email);
-  verifyUser(email);
+  // login(email);
+  // verifyUser(email);
+  res.redirect("/adults");
+  next();
 });
 
 //https://firebasestorage.googleapis.com/v0/b/hackthekids-ac0c9.appspot.com/o/1538847039938?alt=media&token=25928ca0-7596-4ab2-a0c3-44e6759d674e
