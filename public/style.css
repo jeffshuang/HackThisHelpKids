@@ -3,6 +3,9 @@ body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
 }
+.poop {
+  background-image: url("https://content.mycutegraphics.com/backgrounds/polkadot/dotbg72.gif");
+}
 
 video {
   -webkit-transform: scaleX(-1);
@@ -16,7 +19,12 @@ video {
   text-align: center;
   margin-top: 5vh;
 }
-
+.main2 {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 4vh;
+}
 #webcam {
   margin-top: 50px;
   /* background-color: black; */

@@ -8,7 +8,12 @@
   <link rel="stylesheet" type="text/css" href="./style.css">
   <!-- fonts -->
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700,700italic,800" rel="stylesheet">
+
   <!-- javascript -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
 </head>
 
 <body>
@@ -33,6 +38,16 @@
 </body>
 
 <script>
+  document.addEventListener('keydown', function (event) {
+    if (event.keyCode == 65) {
+      window.location.replace("/users");
+
+    }
+    else if (event.keyCode == 83) {
+      alert('s');
+    }
+  }, true);
+  var dataURL = 0;
   console.log('Siht')
   const player = document.getElementById('player');
   const canvas = document.createElement('canvas');
@@ -47,10 +62,37 @@
   var intervalID = setInterval(() => {
     // Draw the video frame to the canvas.
     context.drawImage(player, 0, 0, canvas.width, canvas.height);
-    var dataURL = canvas.toDataURL();
-    console.log(dataURL);
-    console.log('poop');
-    if (++x === 3) {
+    dataURL = canvas.toDataURL();
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAUdsE2TisvisIIX6hWEyTkQ0xWvJERTUY",
+      authDomain: "hackthekids-ac0c9.firebaseapp.com",
+      databaseURL: "https://hackthekids-ac0c9.firebaseio.com",
+      projectId: "hackthekids-ac0c9",
+      storageBucket: "hackthekids-ac0c9.appspot.com",
+      messagingSenderId: "187488860542"
+    };
+    firebase.initializeApp(config);
+
+    var storageRef = firebase.storage().ref();
+
+    // Create a reference to 'mountains.jpg'
+    var timestamp = new Date().valueOf();
+    var p = timestamp.toString();
+    var obama = storageRef.child(p);
+
+    var f = dataURItoBlob(dataURL)
+    obama.put(f).then(function (snapshot) {
+      console.log('Uploaded a blob or file!');
+      storageRef.child(p).getDownloadURL().then(function (url) {
+        // url is the download URL for 'images/stars.jpg'
+
+      })
+
+    });
+
+
+    if (++x === 1) {
       window.clearInterval(intervalID);
     }
   }, 1000);
@@ -61,6 +103,37 @@
     .then((stream) => {
       player.srcObject = stream;
     });
+
+
+  function dataURItoBlob(dataURI) {
+    console.log(dataURI)
+    // convert base64 to raw binary data held in a string
+    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+    var byteString = atob(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to an ArrayBuffer
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    //Old Code
+    //write the ArrayBuffer to a blob, and you're done
+    //var bb = new BlobBuilder();
+    //bb.append(ab);
+    //return bb.getBlob(mimeString);
+
+    //New Code
+    return new Blob([ab], { type: mimeString });
+
+  }
+
+
+
 </script>
 
 </html>
