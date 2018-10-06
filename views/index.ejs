@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Hmm</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <!-- <link rel="stylesheet" href="/fonts/css/all.css"> -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <!-- Custom styles for this template -->
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+
+  <style>
+    /* already defined in bootstrap4 */
+    .text-xs-center {
+        text-align: center;
+    }
+
+    .g-recaptcha {
+        display: inline-block;
+    }
+    body {
+      padding-top: 30px;
+    }
+    .starter-template {
+      padding: 40px 15px;
+      text-align: center;
+    }
+
+</style>
+
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="starter-template">
+      <h1 style = "font-weight: 300">Campus Dining Dollar Exchange</h1>
+      <span class="badge badge-pill badge-success">Online</span>
+      <br>
+      <br>
+
+      <p class="text-secondary"><a href="#" class="text-secondary" style = "font-size: 20px">132</a> successful transactions</p>
+      <!-- <p class="lead">Current Sales</p> -->
+      <div class="container">
+        <div class="row">
+
+          <div class="col">
+          </div>
+
+          <div class="col-sm-10 col-md-8 col-lg-6">
+            <nav>
+              <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                <a id = "dinexString" class="nav-item nav-link active" id="nav-dinex-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-dinex" aria-selected="true">Dinex ()</a>
+                <a id = "blockString" class="nav-item nav-link" id="nav-blocks-tab" data-toggle="tab" href="#nav-blocks" role="tab" aria-controls="nav-blocks" aria-selected="false">Blocks ()</a>
+                <a class="nav-item nav-link" id="nav-sell-tab" data-toggle="tab" href="#nav-sell" role="tab" aria-controls="nav-sell" aria-selected="false">Sell</a>
+                <a class="nav-item nav-link" id="nav-FAQ-tab" data-toggle="tab" href="#nav-FAQ" role="tab" aria-controls="nav-FAQ" aria-selected="false">FAQ</a>
+              </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><div class="row">
+                      <div class="col" >
+                        <a style = "margin-left: 10">Amount</a>
+                      </div>
+                      <div class="col">
+                        Price
+                      </div>
+                      <div class="col">
+                        <a href = "#" class="text-secondary" onclick="ratioChange('dinex')" id = "ratioPressDinex">Ratio <i class="fas fa-caret-up"></i></a>
+                      </div>
+                    </div></li>
+                  </ul>
+
+                  <div class="list-group list-group-flush" id = "dinexList">
+                    <!-- <a href="#" class="list-group-item list-group-item-action" style = "font-size: 12px">
+                      <div class="row">
+                        <div class="col" >
+                          150
+                        </div>
+                        <div class="col">
+                          $75
+                        </div>
+                        <div class="col">
+                          0.5
+                        </div>
+                      </div>
+                    </a> -->
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-lg" id = "history">History</button>
+
+              </div>
+              <div class="tab-pane fade" id="nav-blocks" role="tabpanel" aria-labelledby="nav-blocks-tab">
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><div class="row">
+                      <div class="col" >
+                        <a style = "margin-left: 10">Amount</a>
+                      </div>
+                      <div class="col">
+                        Price
+                      </div>
+                      <div class="col">
+                        <a href = "#" class="text-secondary" onclick="ratioChange('blocks')" id = "ratioPressBlocks">Ratio <i class="fas fa-caret-up"></i></a>
+                      </div>
+                    </div></li>
+                  </ul>
+
+                  <div class="list-group list-group-flush" id = "blocksList">
+
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-lg" id = "history">History</button>
+
+              </div>
+              <div class="tab-pane fade" id="nav-sell" role="tabpanel" aria-labelledby="nav-sell-tab">
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                  <br>
+
+
+                  <div class="btn-group btn-group-toggle colors" data-toggle="buttons" id = "group">
+                    <label class="b1 btn btn-secondary active">
+                      <input type="radio" name="options" id="option1" autocomplete="off" checked> Dinex
+                    </label>
+                    <label class="b2 btn btn-secondary">
+                      <input type="radio" name="options" id="option2" autocomplete="off"> Blocks
+                    </label>
+                  </div>
+                  <br>
+                  <br>
+
+                  <form>
+                    <div class="form-row">
+                      <div class="form-group col-sm-10 col-md-8 col-lg-6" style = "display: block; margin-left: auto; margin-right: auto;">
+                        <label for="inputPassword4">Amount Selling</label>
+                        <input class="form-control form-control-sm" id="dinexAmount" placeholder="Dinex/Block">
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-sm-10 col-md-8 col-lg-6" style = "display: block; margin-left: auto; margin-right: auto;">
+                        <label for="inputPassword4">Amount Selling For</label>
+                        <input class="form-control form-control-sm" id="dollarAmount" placeholder="$$$">
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-sm-10 col-md-8 col-lg-6" style = "display: block; margin-left: auto; margin-right: auto;">
+                        <label for="inputPassword4">School Email</label>
+                        <input class="form-control form-control-sm" id="email" placeholder="@andrew.cmu.edu">
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-sm-10 col-md-8 col-lg-6" style = "display: block; margin-left: auto; margin-right: auto;">
+                        <label for="inputPassword4">Phone Number</label>
+                        <input class="form-control form-control-sm" id="number" placeholder="(999)-999-9999">
+                      </div>
+                    </div>
+
+                    <br>
+                    <div style = 'text-align: center' class="g-recaptcha" data-sitekey="6LcH-l8UAAAAAMqKRgpLKcgG_Nvxb_Vis86DPWu4"></div>
+                    <br>
+                    <button type="button" class="btn btn-success btn-lg sharing">Share Sale</button>
+                    <br>
+                    <br>
+                    <p class="text-secondary"><a href="#" class="text-secondary" style = "font-size: 12px">Edit my offer</a></p>
+                  </form>
+
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav-FAQ" role="tabpanel" aria-labelledby="nav-FAQ-tab">
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                  <br>
+                  <p style = "text-align: left; margin-left: 10px;" class="lead">A tool to connect students who have too much dinex and students who spend too much dinex</p>
+                  <br>
+                  <p class="display-4" style = "text-align: left; margin-left: 10px; font-size:22px; font-weight: 400;">Buying dinex/blocks</p>
+                  <p style = "font-size: 9; text-align: left; margin-left: 10px;"><small>Click the offer that you want
+                    to buy and leave your email address. When you verify your email address,
+                     an email regarding the transaction will automatically be sent to both you and the seller.</small></p>
+
+                  <br>
+                  <p class="display-4" style = "text-align: left; margin-left: 10px; font-size:22px; font-weight: 400;">Sell dinex/blocks</p>
+                  <p style = "font-size: 9; text-align: left; margin-left: 10px;"><small>Type in your offer details.
+                    When you verify your email address, your offer will instantly appear on the market.</small></p>
+
+                  <br>
+
+
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+
+          <div class="col">
+          </div>
+
+
+        </div>
+      </div>
+      <br>
+
+    </div>
+
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <script src="/js/hullabaloo.js"></script>
+  <script>
+
+    var currType = 'dinex'
+
+    var config = {
+      apiKey: "AIzaSyCBWNiZaCyyj1pZEeQJg4cOZejneQqLHhE",
+      authDomain: "https://dinexchange-17441.firebaseio.com/",
+      databaseURL: "https://dinexchange-17441.firebaseio.com",
+      projectId: "dinexchange-17441",
+      storageBucket: "dinexchange-17441.appspot.com",
+      messagingSenderId: "14495238197"
+    };
+    firebase.initializeApp(config);
+    var hulla = new hullabaloo();
+
+    // Get a reference to the database service
+    var database = firebase.database();
+
+    $('.b1').on("click", function (event) {
+      console.log("b1");
+      currType = 'dinex';
+    });
+
+    $('.b2').on("click", function (event) {
+      console.log("b2");
+      currType = 'blocks';
+    });
+
+    $('.sharing').on('click', function(event) {
+      handleForm();
+    });
+
+
+    function addRatio(type, rev) {
+      adding.once('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var childKey = childSnapshot.key;
+          var childData = childSnapshot.val();
+
+          var processedList;
+          if (childKey == type) {
+            processedList = processList(childData, compareRatio, rev);
+            addToWeb(processedList, type);
+          }
+
+        });
+      });
+    }
+
+    var ratioUpDinex = true;
+    var ratioUpBlocks = true;
+
+    function ratioChange(type) {
+
+      var currRadio;
+      if (type == "dinex") {
+        currRadio = document.getElementById("ratioPressDinex");
+        if (ratioUpDinex) {
+          currRadio.innerHTML = 'Ratio <i class="fas fa-caret-down"></i>';
+          ratioUpDinex = false;
+          addRatio(type, true);
+        } else {
+          currRadio.innerHTML = 'Ratio <i class="fas fa-caret-up"></i>';
+          ratioUpDinex = true;
+          addRatio(type, false);
+        }
+      } else {
+        currRadio = document.getElementById("ratioPressBlocks");
+        if (ratioUpBlocks) {
+          currRadio.innerHTML = 'Ratio <i class="fas fa-caret-down"></i>';
+          ratioUpBlocks = false;
+          addRatio(type, true);
+        } else {
+          currRadio.innerHTML = 'Ratio <i class="fas fa-caret-up"></i>';
+          ratioUpBlocks = true;
+          addRatio(type, false);
+        }
+      }
+
+    }
+
+    function validateEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
+
+    function validate(email) {
+      if (validateEmail(email)) {
+        return true;
+      }
+      return false;
+    }
+
+    function validateNumber(number) {
+      var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+      return re.test(number);
+    }
+
+
+    function handleForm() {
+      var dinexAmount = $('#dinexAmount').val();
+      var dollarAmount = $('#dollarAmount').val();
+      var email = $('#email').val();
+      var number = $('#number').val();
+
+      if (dinexAmount == "" || dollarAmount == "" || email == "" || number == "") {
+        hulla.send('Form not complete', 'warning');
+      } else {
+
+        if (!jQuery.isNumeric(dinexAmount)) {
+          hulla.send('Not valid amount', 'warning');
+          return;
+        } else if (!jQuery.isNumeric(dinexAmount)) {
+          hulla.send('Not valid dollar amount', 'warning');
+          return;
+        } else if (!validate(email)) {
+          hulla.send('Not valid email', 'warning');
+          return;
+        } else if (!validateNumber(number)) {
+          hulla.send('Not valid phone number', 'warning');
+          return;
+        }
+
+        var user = email.split('@')[0];
+        var date = new Date();
+        var time = date.valueOf();
+
+        // var date = new Date(time);
+        // alert(date.toString());
+
+        var obj = {
+          email: email,
+          dinexAmount : dinexAmount,
+          dollarAmount: dollarAmount,
+          number: number,
+          date: time
+        };
+
+        var newPostRef = firebase.database().ref(currType + '/' + user).push();
+        newPostRef.set(obj);
+
+        location.reload();
+      }
+    }
+
+    var adding = firebase.database().ref('/');
+
+
+    function compareRatio(a,b) {
+      if (a.ratio < b.ratio)
+        return -1;
+      if (a.ratio > b.ratio)
+        return 1;
+      return 0;
+    }
+
+    function processList(childData, cmpFn, reverse) {
+      var arrAll = []
+
+      Object.keys(childData).forEach(function(key) {
+        var newObj = childData[key];
+
+        Object.keys(newObj).forEach(function(newKey) {
+          var eachObj = newObj[newKey];
+          var ratio = eachObj.dollarAmount / eachObj.dinexAmount;
+          ratio = Math.round(ratio * 100) / 100
+          eachObj.ratio = ratio;
+          eachObj.hash = newKey;
+          arrAll.push(eachObj);
+        });
+      });
+
+      arrAll.sort(cmpFn);
+      if (reverse) {
+        arrAll.reverse();
+      }
+      return arrAll
+    }
+
+    function addToWeb(processList, type) {
+
+      var currentDiv;
+      if (type == "dinex") {
+        currentDiv = document.getElementById("dinexList");
+      } else {
+        currentDiv = document.getElementById("blocksList");
+      }
+      currentDiv.innerHTML = "";
+
+      for (var i = 0; i < processList.length; i++) {
+          var obj = processList[i];
+          var ratio = obj.ratio;
+          var hash = obj.hash;
+
+          var newItem = document.createElement("a");
+          newItem.className = "list-group-item list-group-item-action";
+          newItem.style = "font-size: 12px;";
+          newItem.innerHTML = "<div class='row'> <div class='col'>" + obj.dinexAmount
+            + "</div><div class='col'>" + "$" + obj.dollarAmount + '</div><div class="col">' + ratio + '</div></div>';
+          newItem.href = "https://dinexchangeapp.herokuapp.com/sell?hash=" + hash;
+
+          currentDiv.appendChild(newItem);
+
+      }
+    }
+
+    function createList() {
+      adding.once('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var childKey = childSnapshot.key;
+          var childData = childSnapshot.val();
+
+          processedList = processList(childData, compareRatio, false);
+
+          if (childKey == "dinex") {
+            addToWeb(processedList, "dinex");
+
+            var dinexString = document.getElementById("dinexString");
+            dinexString.innerHTML = "Dinex (" + processedList.length + ")";
+
+          } else if (childKey == "blocks") {
+            addToWeb(processedList, "blocks");
+
+            var blockString = document.getElementById("blockString");
+            blockString.innerHTML = "Blocks (" + processedList.length + ")";
+          }
+
+        });
+      });
+    }
+
+    adding.on('value', function(snapshot) {
+      createList();
+    });
+
+  </script>
+</body>
+</html>
