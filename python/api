@@ -14,6 +14,7 @@ face_api_url = 'https://eastus.api.cognitive.microsoft.com/face/v1.0'
 #def createFace(inputImage):
 
 #compare 2 faces, input has to be faceId
+#output: dict with keys 'isIdentical' and 'confidence'
 def matchFace(keyImage, inputImage):
 	headers = {
 		'Content-Type': 'application/json',
@@ -47,7 +48,10 @@ def detect(inputImage):
 	url = face_api_url+'/detect'
 	response = requests.post(url, headers=headers, params=param, json=data)
 	responseJson = response.json()
-	return responseJson
+
+	return {'faceId': responseJson['faceId'], 'age':responseJson['faceAttributes']['age'], 'emotion':responseJson['faceAttributes']['emotion']}
+
+#faceIds will deprecate on 10/8/2018 so get ur own faceIds
 #2 diff guys
 #print(matchFace("2915e51e-3433-4821-b453-648f9aa20ab9","05f244e9-0999-4152-a312-9f43ee457d02"))
 #2 obamas
