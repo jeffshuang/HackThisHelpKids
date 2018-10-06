@@ -81,6 +81,7 @@ function verifyUser(urlUsed) {
   }).then(function(response) {
     // console.log(response.data[0].faceAttributes.emotion);
     var firstFaceId = response.data[0].faceId;
+    var age = response.data[0].faceAttributes.age;
     console.log(firstFaceId)
     axios({
       method: 'post',
