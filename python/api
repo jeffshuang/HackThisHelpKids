@@ -1,0 +1,54 @@
+import requests
+import matplotlib.pyplot as plt
+from PIL import Image
+from matplotlib import patches
+from io import BytesIO
+import sys
+
+# Replace <Subscription Key> with your valid subscription key.
+subscription_key = "0001beb2e84743f88ebb524de2421c20"
+assert subscription_key
+
+face_api_url = 'https://eastus.api.cognitive.microsoft.com/face/v1.0'
+#add detect or whatever to the end of the url to call the specific func
+#def createFace(inputImage):
+
+#compare 2 faces, input has to be faceId
+def matchFace(keyImage, inputImage):
+	headers = {
+		'Content-Type': 'application/json',
+		'Ocp-Apim-Subscription-Key': subscription_key
+	}
+	data = {
+	    'faceId1' : keyImage,
+	    'faceId2' : inputImage
+	}
+	url = face_api_url+'/verify'
+
+	response = requests.post(url, headers=headers, json=data)
+	#response should be json type
+	responseJson = response.json()
+	print('sex')
+	return responseJson
+
+#upload face to API, return emotions and age, input has to be URL
+def detect(inputImage):
+	headers = {
+		'Content-Type': 'application/json',
+		'Ocp-Apim-Subscription-Key': subscription_key
+	}
+	param = {
+		'returnFaceId' : 'true',
+		'returnFaceAttributes' : {'emotion','age'}
+	}
+	data = {
+		'url' : inputImage
+	}
+	url = face_api_url+'/detect'
+	response = requests.post(url, headers=headers, params=param, json=data)
+	responseJson = response.json()
+	return responseJson
+#2 diff guys
+#print(matchFace("2915e51e-3433-4821-b453-648f9aa20ab9","05f244e9-0999-4152-a312-9f43ee457d02"))
+#2 obamas
+print(matchFace("a15b9252-3f6e-46ef-8420-79d8aab5fb7f","a9f11243-bfc4-4375-939b-2a6291f0409f"))
